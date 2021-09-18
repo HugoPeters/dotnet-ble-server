@@ -5,14 +5,12 @@ using System.Threading.Tasks;
 using Tmds.DBus;
 
 [assembly: InternalsVisibleTo(Tmds.DBus.Connection.DynamicAssemblyName)]
-namespace bluez.DBus
+namespace DotnetBleServer.Core
 {
     [DBusInterface("org.freedesktop.DBus.ObjectManager")]
     interface IObjectManager : IDBusObject
     {
         Task<IDictionary<ObjectPath, IDictionary<string, IDictionary<string, object>>>> GetManagedObjectsAsync();
-        Task<IDisposable> WatchInterfacesAddedAsync(Action<(ObjectPath @object, IDictionary<string, IDictionary<string, object>> interfaces)> handler, Action<Exception> onError = null);
-        Task<IDisposable> WatchInterfacesRemovedAsync(Action<(ObjectPath @object, string[] interfaces)> handler, Action<Exception> onError = null);
     }
 
     [DBusInterface("org.bluez.AgentManager1")]
